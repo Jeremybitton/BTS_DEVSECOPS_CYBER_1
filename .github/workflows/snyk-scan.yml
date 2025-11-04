@@ -2,8 +2,7 @@ name: Snyk Security Scan
 
 on:
   push:
-    branches: [main,fix/security-JeremyBitton]
-
+    branches: [main, fix/security-JeremyBitton]
 
 jobs:
   snyk:
@@ -12,26 +11,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Node.js (si projet Node)
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
 
-      - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/node@master
+      - name: Run Snyk scan and generate SARIF
+        uses: snyk/actions/node@v3
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: test --severity-threshold=high
-
-      - name: Run Snyk and generate SARIF
-        uses: snyk/actions/node@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: test --sarif-file-output=snyk.sarif
+          args: test --severity-threshold=high --sarif-file-output=snyk.sarif --fail-on=all
 
       - name: Upload SARIF to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: snyk.sarif
+          sarif_file: ./snyk.sarif
