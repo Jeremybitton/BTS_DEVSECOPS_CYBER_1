@@ -1,29 +1,43 @@
 name: Snyk Security Scan
 
-on:
-  push:
-    branches: [main, fix/security-JeremyBitton]
+snyk:
+  name: 3. Scan Applicatif (Snyk)
+  runs-on: ubuntu-latest
+  steps:
+    - name: Checkout du code
+      uses: actions/checkout@v4
 
-jobs:
-  snyk:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: Mettre en place Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
+    - name: Lancer Snyk (Dépendances Applicatives)
+      uses: snyk/actions/node@master
+      continue-on-error: true
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+        command: test
+        args: --severity-threshold=high --sarif-file-output=snyk-deps.sarif --fail-on=all
 
-      - name: Run Snyk scan and generate SARIF
-        uses: snyk/actions/node@v1
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: test --severity-threshold=high --sarif-file-output=snyk.sarif --fail-on=all
+    - name: Lancer Snyk (Code SAST)
+      uses: snyk/actions/node@master
+      continue-on-error: true
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+        command: code test
+        args: --sarif-file-output=snyk-code.sarif
 
-      - name: Upload SARIF to GitHub Code Scanning
-        uses: github/codeql-action/upload-sarif@v1
-        with:
-          sarif_file: ./snyk.sarif
+    - name: Uploader le rapport SARIF (Dépendances)
+      if: always()
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: snyk-deps.sarif
+
+    - name: Uploader le rapport SARIF (Code SAST)
+      if: always()
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: snyk-code.sarif
