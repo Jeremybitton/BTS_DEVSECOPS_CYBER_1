@@ -1,5 +1,4 @@
 node_modules
 dist
 .env/
-private-node.pem.pub
-private-node.pem
+*.pem
