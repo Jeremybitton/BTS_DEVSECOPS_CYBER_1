@@ -1,0 +1,19 @@
+on:
+  push:
+    branches: [main, fix/security-JeremyBitton]
+jobs:
+  trivy_scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Trivy scan filesystem
+        uses: aquasecurity/trivy-action@v2
+        with:
+          scan-type: 'fs'
+          path: './'
+          format: 'table'
+          exit-code: '1'
+          vuln-type: 'os,library'

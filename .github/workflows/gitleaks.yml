@@ -1,0 +1,13 @@
+on:
+  push:
+    branches: [main,fix/security-JeremyBitton]
+jobs:
+  snyk_and_gitleaks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # GitLeaks scan
+      - uses: zricethezav/gitleaks-action@v2
+        with:
+          args: "--redact --exit-code 1"
