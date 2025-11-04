@@ -11,6 +11,6 @@ jobs:
       - uses: actions/checkout@v4
 
       # GitLeaks scan
-      - uses: zricethezav/gitleaks-action@v2
+      - uses: zricethezav/gitleaks-action@v1
         with:
           args: "--redact --exit-code 1"
