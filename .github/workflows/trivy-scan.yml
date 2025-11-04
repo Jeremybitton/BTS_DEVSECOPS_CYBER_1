@@ -1,5 +1,4 @@
 name: Trivy Security Scan
-
 trivy:
   name: 2. Scan de Vulnérabilités & IaC (Trivy)
   runs-on: ubuntu-latest

@@ -1,5 +1,4 @@
 name: Snyk Security Scan
-
 snyk:
   name: 3. Scan Applicatif (Snyk)
   runs-on: ubuntu-latest
