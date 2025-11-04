@@ -1,4 +1,5 @@
 name: Gitleaks Security Scan
+
 gitleaks:
   name: 1. Scan de Secrets (Gitleaks)
   runs-on: ubuntu-latest
