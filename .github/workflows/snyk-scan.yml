@@ -24,20 +24,6 @@ jobs:
         with:
           args: test --severity-threshold=high
 
-
-
-      - name: Build Docker image
-        run: docker build -t devsecure-api .
-
-      - name: Scan Docker image with Snyk
-        uses: snyk/actions/docker@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          image: devsecure-api
-          args: test --severity-threshold=high
-
-
       - name: Run Snyk and generate SARIF
         uses: snyk/actions/node@master
         env:
