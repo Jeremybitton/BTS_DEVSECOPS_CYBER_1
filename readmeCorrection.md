@@ -11,9 +11,9 @@
 | CVE-2020-7660 (serialize-javascript)   | npm install serialize-javascript@>=3.1.0 | HIGH                   | A03:2021 – Injection                                                                                              |
 | CVE-2019-16769 (serialize-javascript)  |npm install serialize-javascript@>=3.1.0 | MEDIUM                 | A03:2021 – Injection(Pour corriger la dernière vulnérabilité on va dans le package.json et on change la version ) |
 | .env                                   |dans le .gitignore| HIGH                   | a supprimer de github car push dans le main                                                                                                   |
-| private-node.pem                       |dans le .gitignore| HIGH                   | a supprimer de github car push dans le main                                                                       |
-| private-node.pem.pub                   |dans le .gitignore| HIGH                   | a supprimer de github car push dans le main                                                                       |
-| |
+| private-node.pem                       |dans le .gitignore| HIGH                   | a supprimer de github car push dans le main||
+| private-node.pem.pub                   |dans le .gitignore| HIGH                   | a supprimer de github car push dans le main||
+| snyk                                   |package.json| HIGH| update serialize-javascript dans le package.json car tres vulnerable| A    A06:2021 - Vulnérable and Outdated Components     |
 
 
 
