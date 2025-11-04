@@ -10,9 +10,10 @@
 | GHSA-gf8q-jrpm-jvxq (node-forge)       | npm install node-forge@^1.3.0| LOW                    | A05:2021 – Security Misconfiguration                                                                              |
 | CVE-2020-7660 (serialize-javascript)   | npm install serialize-javascript@>=3.1.0 | HIGH                   | A03:2021 – Injection                                                                                              |
 | CVE-2019-16769 (serialize-javascript)  |npm install serialize-javascript@>=3.1.0 | MEDIUM                 | A03:2021 – Injection(Pour corriger la dernière vulnérabilité on va dans le package.json et on change la version ) |
-| .env                                   |dans le .gitignore| HIGH                   |                                                                                                                   |
-| private-node.pem                       |dans le .gitignore| HIGH                   | a supprimer de gitHUB car push dans le main                                                                       |
-| private-node.pem.pub                   |dans le .gitignore| HIGH                   | a supprimer de gitHUB car push dans le main                                                                       |
+| .env                                   |dans le .gitignore| HIGH                   | a supprimer de github car push dans le main                                                                                                   |
+| private-node.pem                       |dans le .gitignore| HIGH                   | a supprimer de github car push dans le main                                                                       |
+| private-node.pem.pub                   |dans le .gitignore| HIGH                   | a supprimer de github car push dans le main                                                                       |
+| |
 
 
 

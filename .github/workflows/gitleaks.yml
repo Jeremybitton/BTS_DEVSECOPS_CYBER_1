@@ -5,7 +5,7 @@ on:
   push:
     branches: [main,fix/security-JeremyBitton]
 jobs:
-  snyk_and_gitleaks:
+  gitleaks:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
