@@ -4,7 +4,7 @@ const _ = require('lodash');
 const { safeSerialize } = require('../utils/serializer');
 
 router.post('/render', (req, res) => {
-  const userTemplate = req.body.template || '<%= name %>';
+  const userTemplate = '<%= name %>';  // supression de req.body.template ||
   const compiled = _.template(userTemplate);
   const html = compiled({ name: req.body.name || 'alice' });
   res.send(html);
