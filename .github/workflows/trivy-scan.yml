@@ -1,30 +1,24 @@
-name: Trivy Security Scan
+run-name: Trivy Scan
+name: Trivy Scan
 
-trivy:
-  name: 2. Scan de Vulnérabilités & IaC (Trivy)
-  runs-on: ubuntu-latest
-  steps:
-    - name: Checkout du code
-      uses: actions/checkout@v4
+on:
+  push:
+    branches: [main, fix/security-JeremyBitton]
 
-    - name: Lancer Trivy FS Scan
-      uses: aquasecurity/trivy-action@0.20.0
-      with:
-        scan-type: 'fs'
-        scan-ref: './'
+jobs:
+  trivy-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-        scanners: 'vuln,config,secret'
-
-        format: 'sarif'
-        output: 'trivy-report.sarif'
-
-        exit-code: '1'
-        severity: 'HIGH,CRITICAL'
-
-        ignore-unfixed: true
-
-    - name: Uploader le rapport SARIF de Trivy
-      if: always()
-      uses: github/codeql-action/upload-sarif@v3
-      with:
-        sarif_file: 'trivy-report.sarif'
+      - name: Scan dependencies with Trivy
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: "fs"
+          scan-ref: "."
+          format: "table"
+          exit-code: "1"
+          ignore-unfixed: false
+          vuln-type: "library"
+          severity: "CRITICAL,HIGH,MEDIUM,LOW"
