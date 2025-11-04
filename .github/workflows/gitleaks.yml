@@ -1,3 +1,6 @@
+name: Gitleaks Security Scan
+
+
 on:
   push:
     branches: [main,fix/security-JeremyBitton]

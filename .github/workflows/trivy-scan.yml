@@ -1,3 +1,5 @@
+name: Trivy Security Scan
+
 on:
   push:
     branches: [main, fix/security-JeremyBitton]
